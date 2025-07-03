@@ -51,6 +51,7 @@
       overflow:hidden;
       margin-top:1.5rem;
       opacity:0;
+      text-align: center;
     }
     @keyframes fadeIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
 
@@ -81,6 +82,7 @@
       animation:slideDown 1s ease-in-out forwards;
       animation-delay:6s;
       z-index:9998;
+      text-align:center;
     }
     @keyframes slideDown{
       to{transform:translateY(0)}
@@ -88,6 +90,15 @@
     @keyframes writeText{
       from { width: 0; opacity: 1; }
       to { width: 100%; opacity: 1; }
+    }
+
+    @media screen and (max-width: 600px) {
+      h1, h2, h3, h4 {
+        font-size: 6vw;
+      }
+      #vexSection h4 {
+        font-size: 8vw;
+      }
     }
   </style>
 </head>
@@ -101,12 +112,10 @@
   <div class="wrapper">
     <h1>Doğum Günün Kutlu Olsun Güldeste Abla</h1>
     <h2>Nice 29'lara 🎉</h2>
-    <h3 id="loveMessage">Seni Çok Seviyoruz Güldeste Abla
-~Mustafa</h3>
   </div>
 
   <div id="vexSection">
-    <h4>Vexarithul</h4>
+    <h4>mustidev</h4>
   </div>
 
   <div class="footer">mustidev 2025 All Rights Reserved</div>
@@ -138,7 +147,7 @@
       get dead(){return this.a>=this.l}}
 
     const rockets=[],sparks=[];
-    function launch(){const x=Math.random()*W*0.8+W*0.1;rockets.push(new Particle(x,H,{x:(Math.random()-.5)*2,y:-Math.random()*4-6},'rgba(255,255,255,.9)',70,3))}
+    function launch(){const x=Math.random()*W*0.8+W*0.1;rockets.push(new Particle(x,H,{x:0,y:-Math.random()*4-6},'rgba(255,255,255,.9)',70,3))} // düz yukarı
     function boom(x,y){const n=120+Math.random()*40;const baseHue=20+Math.random()*40;for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2;const spd=Math.random()*4+3;const col=`hsl(${baseHue+Math.random()*10},100%,65%)`;sparks.push(new Particle(x,y,{x:Math.cos(a)*spd,y:Math.sin(a)*spd},col,80+Math.random()*40,2+Math.random()*2))}}
 
     function animate(){requestAnimationFrame(animate);ctx.fillStyle='rgba(255,248,240,0.12)';ctx.fillRect(0,0,W,H);
