@@ -10,96 +10,49 @@
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
     html,body{
-      height:100%;
-      font-family:'Dancing Script',cursive;
-      background:#fff8f0;
-      overflow:hidden;
-      transition:background 1s ease;
+      height:100%;font-family:'Dancing Script',cursive;background:#fff8f0;overflow:hidden;transition:background 1s ease;
     }
 
-    #intro{
-      position:fixed;inset:0;
-      background:#5d4037;
-      display:flex;align-items:center;justify-content:center;
-      font-size:3rem;color:#fff;
-      z-index:9999;
-      animation:slideUp 2s ease-in-out forwards;
-    }
-    @keyframes slideUp{
-      0%,90%{transform:translateY(0)}
-      100%{transform:translateY(-100%)}
-    }
+    /* ----- INTRO ----- */
+    #intro{position:fixed;inset:0;background:#5d4037;display:flex;justify-content:center;align-items:center;font-size:3rem;color:#fff;z-index:9999;animation:slideUp 2s ease-in-out forwards}
+    @keyframes slideUp{0%,90%{transform:translateY(0)}100%{transform:translateY(-100%)}}
 
-    .wrapper{
-      position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;pointer-events:none;padding:1rem;z-index:2;
-    }
+    /* ----- MAIN WRAPPER ----- */
+    .wrapper{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;pointer-events:none;padding:1rem;z-index:2}
 
-    h1,h2,h3,h4{
-      font-family:'Dancing Script',cursive;
-      color:#c9a68a;text-shadow:1px 1px 2px rgba(0,0,0,.15);
-      opacity:0;animation:fadeIn 1.8s ease-out forwards;
-    }
-    h1{font-size:clamp(2.2rem,7vw,4.5rem);font-weight:600;}
-    h2{font-size:clamp(1.5rem,5vw,3rem);margin-top:.8rem;animation-delay:.4s;}
-    h3{font-size:clamp(1.3rem,4.5vw,2.8rem);margin-top:1rem;white-space:pre-line;animation:none;opacity:1;}
-    h4{
-      font-family: 'Pacifico', cursive;
-      font-size:clamp(2rem,6vw,4rem);
-      color:white;
-      animation:writeText 2s steps(20) forwards;
-      white-space:nowrap;
-      overflow:hidden;
-      margin-top:1.5rem;
-      opacity:0;
-      text-align: center;
-    }
+    h1,h2,h3,h4{font-family:'Dancing Script',cursive;color:#c9a68a;text-shadow:1px 1px 2px rgba(0,0,0,.15);opacity:0;animation:fadeIn 1.8s ease-out forwards}
+    h1{font-size:clamp(2.2rem,7vw,4.5rem);font-weight:600}
+    h2{font-size:clamp(1.5rem,5vw,3rem);margin-top:.8rem;animation-delay:.4s}
+    h3{font-size:clamp(1.3rem,4.5vw,2.8rem);margin-top:1rem;white-space:pre-line;animation:none;opacity:1}
+    h4{font-family:'Pacifico',cursive;font-size:clamp(2rem,6vw,4rem);color:#fff;animation:writeText 2s steps(20) forwards;white-space:nowrap;overflow:hidden;margin-top:1.5rem;opacity:0;text-align:center}
     @keyframes fadeIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes writeText{from{width:0;opacity:1}to{width:100%;opacity:1}}
 
-    .particle{
-      position:absolute;border-radius:50%;pointer-events:none;
-      animation:floatUp 8s linear infinite;
-      box-shadow:0 0 6px rgba(255,160,70,.8);
-    }
-    @keyframes floatUp{
-      0%{transform:translateY(0) scale(.8) rotate(0deg);opacity:.9}
-      100%{transform:translateY(-110vh) scale(1.2) rotate(360deg);opacity:0}
-    }
+    /* ----- PARTICLES ----- */
+    .particle{position:absolute;border-radius:50%;pointer-events:none;animation:floatUp 8s linear infinite;box-shadow:0 0 6px rgba(255,160,70,.8)}
+    @keyframes floatUp{0%{transform:translateY(0) scale(.8) rotate(0);opacity:.9}100%{transform:translateY(-110vh) scale(1.2) rotate(360deg);opacity:0}}
 
+    /* ----- CANVAS FIREWORKS ----- */
     #fireCanvas{position:fixed;inset:0;z-index:1}
 
-    .footer{
-      position:absolute;bottom:10px;width:100%;text-align:center;font-size:.9rem;color:#a1887f;opacity:.85;font-weight:400;pointer-events:none;z-index:2;
-    }
+    /* ----- HEART & STAR ----- */
+    .emoji{position:absolute;font-size:1.8rem;animation:floatEmoji 4s linear forwards;pointer-events:none;z-index:10}
+    @keyframes floatEmoji{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-130vh) scale(1.6);opacity:0}}
 
-    .glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.25)0%,transparent 70%);animation:glowMove 10s infinite ease-in-out;z-index:1;}
+    /* ----- FOOTERS ----- */
+    .footer{position:absolute;bottom:10px;width:100%;text-align:center;font-size:.9rem;color:#a1887f;opacity:.85;font-weight:400;pointer-events:none;z-index:2}
+    .footer-love{position:absolute;bottom:40px;width:100%;text-align:center;font-size:1.2rem;color:#ff69b4;animation:fadeIn 3s ease-in-out 6s forwards;opacity:0;z-index:2}
+
+    /* ----- VEX SECTION (mustidev) ----- */
+    #vexSection{position:fixed;inset:0;background:#0077cc;display:flex;justify-content:center;align-items:center;transform:translateY(100%);animation:slideDown 1s ease-in-out forwards 6s;text-align:center;z-index:9998}
+    @keyframes slideDown{to{transform:translateY(0)}}
+
+    /* ----- GLOW ORBS ----- */
+    .glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.25)0%,transparent 70%);animation:glowMove 10s infinite ease-in-out;z-index:1}
     @keyframes glowMove{0%{transform:translate(0)}50%{transform:translate(40px,-50px)}100%{transform:translate(0)}}
 
-    #vexSection{
-      position:fixed;inset:0;
-      background:#0077cc;
-      display:flex;justify-content:center;align-items:center;
-      transform:translateY(100%);
-      animation:slideDown 1s ease-in-out forwards;
-      animation-delay:6s;
-      z-index:9998;
-      text-align:center;
-    }
-    @keyframes slideDown{
-      to{transform:translateY(0)}
-    }
-    @keyframes writeText{
-      from { width: 0; opacity: 1; }
-      to { width: 100%; opacity: 1; }
-    }
-
-    @media screen and (max-width: 600px) {
-      h1, h2, h3, h4 {
-        font-size: 6vw;
-      }
-      #vexSection h4 {
-        font-size: 8vw;
-      }
-    }
+    /* ----- RESPONSIVE ----- */
+    @media(max-width:600px){h1,h2,h3,h4{font-size:6vw}#vexSection h4{font-size:8vw}}
   </style>
 </head>
 <body>
@@ -112,49 +65,48 @@
   <div class="wrapper">
     <h1>Doğum Günün Kutlu Olsun Güldeste Abla</h1>
     <h2>Nice 29'lara 🎉</h2>
+    <h3>Seni Çok Seviyoruz Güldeste Abla\n~Mustafa</h3>
   </div>
 
-  <div id="vexSection">
-    <h4>mustidev</h4>
-  </div>
+  <div id="vexSection"><h4>mustidev</h4></div>
 
   <div class="footer">mustidev 2025 All Rights Reserved</div>
+  <div class="footer-love">💖 Her şey gönlünce olsun Güldeste Abla 💖</div>
 
   <script>
+    /* ------------ Remove intro ------------ */
     setTimeout(()=>document.getElementById('intro').remove(),2000);
 
+    /* ------------ DOM particles (circles) ------------ */
     const spawnParticle=()=>{
-      const p=document.createElement('div');
-      p.className='particle';
-      const size=6+Math.random()*10;
+      const p=document.createElement('div');p.className='particle';
+      const size=innerWidth<600?14+Math.random()*10:6+Math.random()*10;
       p.style.width=p.style.height=size+'px';
-      p.style.left=Math.random()*100+'vw';
-      p.style.top='100vh';
-      const hue=20+Math.random()*40;
-      p.style.background=`hsl(${hue},90%,60%)`;
-      document.body.appendChild(p);
-      setTimeout(()=>p.remove(),8000);
+      p.style.left=Math.random()*100+'vw';p.style.top='100vh';
+      p.style.background=`hsl(${20+Math.random()*40},90%,60%)`;
+      document.body.appendChild(p);setTimeout(()=>p.remove(),8000);
     };
     setInterval(spawnParticle,60);
 
-    const canvas=document.getElementById('fireCanvas');
-    const ctx=canvas.getContext('2d');
-    let W,H;const resize=()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight};resize();addEventListener('resize',resize);
+    /* ------------ Emoji (heart & star) ------------ */
+    const spawnEmoji=()=>{
+      const e=document.createElement('div');e.className='emoji';
+      const isStar=Math.random()<0.5;
+      e.textContent=isStar?'⭐️':'❤️';
+      if(!isStar){const colors=['#ff6b81','#ff3b30','#ff9f0a','#ff375f'];e.style.color=colors[Math.floor(Math.random()*colors.length)];}
+      e.style.left=Math.random()*100+'vw';e.style.top='100vh';
+      document.body.appendChild(e);setTimeout(()=>e.remove(),4000);
+    };
+    setInterval(spawnEmoji,700);
 
-    class Particle{constructor(x,y,v,c,l,s){this.x=x;this.y=y;this.v=v;this.c=c;this.l=l;this.a=0;this.s=s}
-      update(){this.x+=this.v.x;this.y+=this.v.y;this.v.y+=0.015;this.a++}
-      draw(){const t=this.a/this.l;ctx.globalAlpha=1-t;ctx.fillStyle=this.c;ctx.beginPath();ctx.arc(this.x,this.y,this.s*(1-t),0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}
-      get dead(){return this.a>=this.l}}
-
+    /* ------------ Canvas fireworks ------------ */
+    const c=document.getElementById('fireCanvas');const ctx=c.getContext('2d');let W,H;const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight};rs();addEventListener('resize',rs);
+    class P{constructor(x,y,v,col,l,s){this.x=x;this.y=y;this.v=v;this.col=col;this.l=l;this.a=0;this.s=s}upd(){this.x+=this.v.x;this.y+=this.v.y;this.v.y+=.015;this.a++}draw(){const t=this.a/this.l;ctx.globalAlpha=1-t;ctx.fillStyle=this.col;ctx.beginPath();ctx.arc(this.x,this.y,this.s*(1-t),0,6.28);ctx.fill();ctx.globalAlpha=1}get dead(){return this.a>=this.l}}
     const rockets=[],sparks=[];
-    function launch(){const x=Math.random()*W*0.8+W*0.1;rockets.push(new Particle(x,H,{x:0,y:-Math.random()*4-6},'rgba(255,255,255,.9)',70,3))} // düz yukarı
-    function boom(x,y){const n=120+Math.random()*40;const baseHue=20+Math.random()*40;for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2;const spd=Math.random()*4+3;const col=`hsl(${baseHue+Math.random()*10},100%,65%)`;sparks.push(new Particle(x,y,{x:Math.cos(a)*spd,y:Math.sin(a)*spd},col,80+Math.random()*40,2+Math.random()*2))}}
-
-    function animate(){requestAnimationFrame(animate);ctx.fillStyle='rgba(255,248,240,0.12)';ctx.fillRect(0,0,W,H);
-      for(let i=rockets.length-1;i>=0;i--){const r=rockets[i];r.update();r.draw();if(r.v.y>-1){rockets.splice(i,1);boom(r.x,r.y);}}
-      for(let i=sparks.length-1;i>=0;i--){const p=sparks[i];p.update();p.draw();if(p.dead)sparks.splice(i,1);} }
-
-    setTimeout(()=>{setInterval(launch,600);animate();},2000);
+    const launch=()=>{const x=Math.random()*W*.8+W*.1;rockets.push(new P(x,H,{x:0,y:-Math.random()*4-6},'rgba(255,255,255,.9)',70,3))};
+    const boom=(x,y)=>{const n=120+Math.random()*40,base=20+Math.random()*40;for(let i=0;i<n;i++){const a=Math.random()*6.28,spd=Math.random()*4+3,col=`hsl(${base+Math.random()*10},100%,65%)`;sparks.push(new P(x,y,{x:Math.cos(a)*spd,y:Math.sin(a)*spd},col,80+Math.random()*40,2+Math.random()*2))}};
+    const anim=()=>{requestAnimationFrame(anim);ctx.fillStyle='rgba(255,248,240,.12)';ctx.fillRect(0,0,W,H);for(let i=rockets.length-1;i>=0;i--){const r=rockets[i];r.upd();r.draw();if(r.v.y>-1){rockets.splice(i,1);boom(r.x,r.y);}}for(let i=sparks.length-1;i>=0;i--){const p=sparks[i];p.upd();p.draw();if(p.dead)sparks.splice(i,1)}};
+    setTimeout(()=>{setInterval(launch,600);anim();},2000);
   </script>
 </body>
 </html>
