@@ -10,12 +10,40 @@
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
     html,body{
-      height:100%;font-family:'Dancing Script',cursive;background:#fff8f0;overflow:hidden;transition:background 1s ease;
+      height:100%;font-family:'Dancing Script',cursive;background:#fff8f0;transition:background 1s ease;
+    }
+
+    body.lock-scroll {
+      overflow: hidden;
     }
 
     /* ----- INTRO ----- */
-    #intro{position:fixed;inset:0;background:#5d4037;display:flex;justify-content:center;align-items:center;font-size:3rem;color:#fff;z-index:9999;animation:slideUp 2s ease-in-out forwards}
-    @keyframes slideUp{0%,90%{transform:translateY(0)}100%{transform:translateY(-100%)}}
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: #5d4037;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      color: #fff;
+      z-index: 9999;
+    }
+
+    .swipe-bar {
+      margin-top: 2rem;
+      width: 60px;
+      height: 6px;
+      background: #fff;
+      border-radius: 10px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
     /* ----- MAIN WRAPPER ----- */
     .wrapper{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;pointer-events:none;padding:1rem;z-index:2}
@@ -44,19 +72,21 @@
     .footer-love{position:absolute;bottom:40px;width:100%;text-align:center;font-size:1.2rem;color:#ff69b4;animation:fadeIn 3s ease-in-out 6s forwards;opacity:0;z-index:2}
 
     /* ----- VEX SECTION (mustidev) ----- */
-    #vexSection{position:fixed;inset:0;background:#0077cc;display:flex;justify-content:center;align-items:center;transform:translateY(100%);animation:slideDown 1s ease-in-out forwards 6s;text-align:center;z-index:9998}
+    #vexSection{position:fixed;inset:0;background:#0077cc;display:flex;justify-content:center;align-items:center;transform:translateY(100%);animation:slideDown 1s ease-in-out forwards 8s;text-align:center;z-index:9998}
     @keyframes slideDown{to{transform:translateY(0)}}
 
     /* ----- GLOW ORBS ----- */
     .glow{position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.25)0%,transparent 70%);animation:glowMove 10s infinite ease-in-out;z-index:1}
     @keyframes glowMove{0%{transform:translate(0)}50%{transform:translate(40px,-50px)}100%{transform:translate(0)}}
 
-    /* ----- RESPONSIVE ----- */
     @media(max-width:600px){h1,h2,h3,h4{font-size:6vw}#vexSection h4{font-size:8vw}}
   </style>
 </head>
-<body>
-  <div id="intro">Hoşgeldin</div>
+<body class="lock-scroll">
+  <div id="intro">
+    <div>Hoşgeldin</div>
+    <div class="swipe-bar"></div>
+  </div>
 
   <canvas id="fireCanvas"></canvas>
   <div class="glow" style="top:12%;left:8%"></div>
@@ -74,10 +104,16 @@
   <div class="footer-love">💖 Her şey gönlünce olsun Güldeste Abla 💖</div>
 
   <script>
-    /* ------------ Remove intro ------------ */
-    setTimeout(()=>document.getElementById('intro').remove(),2000);
+    // Swipe to continue logic
+    let startY = null;
+    window.addEventListener('touchstart', e => startY = e.touches[0].clientY);
+    window.addEventListener('touchend', e => {
+      if (startY !== null && e.changedTouches[0].clientY < startY - 50) {
+        document.getElementById('intro').remove();
+        document.body.classList.remove('lock-scroll');
+      }
+    });
 
-    /* ------------ DOM particles (circles) ------------ */
     const spawnParticle=()=>{
       const p=document.createElement('div');p.className='particle';
       const size=innerWidth<600?14+Math.random()*10:6+Math.random()*10;
@@ -88,7 +124,6 @@
     };
     setInterval(spawnParticle,60);
 
-    /* ------------ Emoji (heart & star) ------------ */
     const spawnEmoji=()=>{
       const e=document.createElement('div');e.className='emoji';
       const isStar=Math.random()<0.5;
@@ -99,7 +134,6 @@
     };
     setInterval(spawnEmoji,700);
 
-    /* ------------ Canvas fireworks ------------ */
     const c=document.getElementById('fireCanvas');const ctx=c.getContext('2d');let W,H;const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight};rs();addEventListener('resize',rs);
     class P{constructor(x,y,v,col,l,s){this.x=x;this.y=y;this.v=v;this.col=col;this.l=l;this.a=0;this.s=s}upd(){this.x+=this.v.x;this.y+=this.v.y;this.v.y+=.015;this.a++}draw(){const t=this.a/this.l;ctx.globalAlpha=1-t;ctx.fillStyle=this.col;ctx.beginPath();ctx.arc(this.x,this.y,this.s*(1-t),0,6.28);ctx.fill();ctx.globalAlpha=1}get dead(){return this.a>=this.l}}
     const rockets=[],sparks=[];
